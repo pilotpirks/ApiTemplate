@@ -1,0 +1,5 @@
+dbsettings:
+  dbtype: "sqlite3" # mysql | postgres
+  dbconnect: "./adm.db" # mysql: "test:test@(localhost:3306)/test" | postgres: "user=foo dbname=bar sslmode=disable"
+settings:
+  debug: true

@@ -1,0 +1,87 @@
+definitions:
+  models.User:
+    properties:
+      created:
+        type: string
+      id:
+        type: string
+      jwt_key:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+    required:
+    - name
+    - password
+    type: object
+info:
+  contact: {}
+paths:
+  /ping:
+    get:
+      consumes:
+      - '*/*'
+      description: Check service access
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: boolean
+        "400":
+          description: Bad Request
+      summary: Check access
+      tags:
+      - root
+  /users/all:
+    post:
+      description: Get list of users
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.User'
+            type: array
+        "400":
+          description: error string
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Get list of users
+      tags:
+      - user
+  /users/update:
+    post:
+      consumes:
+      - application/json
+      description: Update user parameters
+      parameters:
+      - description: Updated models.User
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/models.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: boolean
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Update user parameters
+      tags:
+      - user
+swagger: "2.0"
